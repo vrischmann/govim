@@ -39,7 +39,7 @@ const (
 	EnvLogfileTmpl      = "GOVIM_LOGFILE_TMPL"
 	EnvTestscriptStderr = "GOVIM_TESTSCRIPT_STDERR"
 
-	// LatestVim = "v8.1.1649"
+	LatestVim = "v8.1.1700"
 )
 
 var (
@@ -61,7 +61,7 @@ func (c Command) BuildCommand(args ...string) *exec.Cmd {
 }
 
 var (
-	GoVersions = []string{"go1.12.5"}
+	GoVersions = []string{"go1.12.7", "go1.13beta1"}
 
 	// VimVersions contains the versions of all flavors of Vim/Gvim/X to be tested
 	VimVersions = []Version{
@@ -72,8 +72,8 @@ var (
 		GvimVersion(MinVimIncrementalSync),
 		VimVersion(MinPopupWindowBalloon),
 		GvimVersion(MinPopupWindowBalloon),
-		// VimVersion(LatestVim),
-		// GvimVersion(LatestVim),
+		VimVersion(LatestVim),
+		GvimVersion(LatestVim),
 	}
 )
 
