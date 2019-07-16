@@ -14,6 +14,15 @@ cd "${BASH_SOURCE%/*}"
 # Note that VIM_FLAVOR can be one of vim, gvim or neovim and
 # VIM_VERSION is a version pertaining to any of them.
 
+if [ "${CI:-}" == "true" ] && [ "${TRAVIS_PULL_REQUEST_BRANCH:-}" != "" ] && [ "${CI_ONLY_RUN:-}" != "" ]
+then
+	if [[ ! "${VIM_FLAVOR}_${VIM_VERSION}_${GO_VERSION}" =~ $(echo ^\($(echo $CI_ONLY_RUN | sed 's/[[:blank:]]//g' | sed -e 's/^,*//' | sed -e 's/,*$//g' | sed -e 's/,/|/g')\)$) ]]
+	then
+		echo "Skipping build for ${VIM_FLAVOR}_${VIM_VERSION}_${GO_VERSION}"
+		exit 0
+	fi
+fi
+
 if [ "$#" -eq 3 ]
 then
 	VIM_FLAVOR="$1"

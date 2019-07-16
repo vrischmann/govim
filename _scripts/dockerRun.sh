@@ -34,7 +34,7 @@ rm -f $(git ls-files -- ':!:cmd/govim/internal' '**/gen_*.*' 'gen_*.*') .travis.
 go generate $(go list ./... | grep -v 'govim/internal')
 go test $(go list ./... | grep -v 'govim/internal')
 
-if [ "${CI:-}" == "true" ]
+if [ "${CI:-}" == "true" ] && [ "${TRAVIS_BRANCH:-}_${TRAVIS_PULL_REQUEST_BRANCH:-}" == "master_" ]
 then
 	go test -race $(go list ./... | grep -v 'govim/internal')
 fi
