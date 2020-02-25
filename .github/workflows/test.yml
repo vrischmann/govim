@@ -6,8 +6,6 @@ on:
   pull_request:
     branches:
       - '**'
-  schedule:
-    - cron: '0 9 * * *'
 
 # actions/upload-artifact does not os.ExpandEnv the value passed
 # to it as a path. Hence we have to hard code a directory that
