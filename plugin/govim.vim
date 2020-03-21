@@ -534,6 +534,19 @@ function GOVIM_internal_SuggestedFixesFilter(id, key)
     return popup_filter_menu(a:id, a:key)
 endfunc
 
+function GOVIM_internal_Decls(lines)
+  call fzf#run({
+    \ 'source':   a:lines,
+		\ 'options': '+m -d "\t" --with-nth 1,2 -n 2 --tiebreak=index',
+		\ 'sink':    function('s:internal_FZFLineHandler'),
+		\ 'down':    '40%'})
+endfunction
+
+function! s:internal_FZFLineHandler(line)
+  let line = split(a:line, '\t')[0]
+  execute ':' + (line + 1)
+endfunction
+
 " In case we are running in test mode
 if $GOVIM_DISABLE_USER_BUSY == "true"
   function GOVIM_test_SetUserBusy(busy)
