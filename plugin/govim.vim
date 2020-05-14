@@ -225,8 +225,8 @@ function s:define(channel, msg)
     elseif a:msg[1] == "initcomplete"
       let s:govim_status = "initcomplete"
       " doautoall BufRead also triggers ftplugin stuff
-      doautoall govim BufRead
-      doautoall govim FileType
+      doautoall BufRead
+      doautoall FileType
       if $GOVIM_DISABLE_USER_BUSY != "true"
         au govim CursorMoved,CursorMovedI * ++nested :call s:userBusy(1)
         au govim CursorHold,CursorHoldI * ++nested :call s:userBusy(0)
